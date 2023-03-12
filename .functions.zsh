@@ -56,3 +56,17 @@ make_db() {
       fi
    fi
 }
+
+install_xdebug() {
+   php_version_dot=$(php -r "\$v=explode('.', PHP_VERSION ); echo implode('.', array_splice(\$v, 0, -1));")
+   php_ini_file="/opt/homebrew/etc/php/$php_version_dot/php.ini"
+   xendConfigFolder="/opt/homebrew/etc/php/$php_version_dot/conf.d"
+   xdebugIniFile="$xendConfigFolder/ext-xdebug.ini"
+
+   #Delete reference to xdebug from the php.ini file
+   sed -in '/.*xdebug.*/d' $php_ini_file
+
+   #Make a specific xdebug ini file for this php version
+   echo "[xdebug]" >> $xdebugIniFile
+   echo "zend_extension=xdebug" >> $xdebugIniFile
+}

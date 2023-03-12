@@ -18,7 +18,8 @@ brew update
 brew bundle
 
 # Install PHP extensions with PECL
-pecl install redis xedebug memcached imagick
+pecl install redis
+pecl install xdebug
 
 # Install global Composer packages
 composer global require laravel/installer laravel/valet
@@ -29,6 +30,8 @@ $HOME/.composer/vendor/bin/valet install
 # Create a Sites directory
 # This is a default directory for macOS user accounts but doesn't comes pre-installed
 mkdir $HOME/Sites
+
+echo "Sites directory created in the home folder.\n\nYou will need to run 'valet park' in the Sites folder\n\n"
 
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
 rm -rf $HOME/.zshrc
